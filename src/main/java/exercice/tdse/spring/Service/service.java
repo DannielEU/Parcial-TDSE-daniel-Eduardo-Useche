@@ -3,6 +3,7 @@ package exercice.tdse.spring.Service;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,10 @@ public class service {
     }
 
     public String binarySearch(Map<String, String> params){
-        return null;
+        List<Integer> listNumbers = this.toList(params);
+        Integer num = this.value(params);
+        String output = this.searchBinary(listNumbers,num);
+        return this.outputschema(params, output, "BinarySearch");
     }
 
     private String outputschema(Map<String, String> params, String output, String operation) {
@@ -57,5 +61,33 @@ public class service {
             return found.toString();
         }
     }
+    private String searchBinary(List<Integer> lista, Integer num){
+        List<Integer> listSorted = this.sorter(lista);
+        String v = this.binary(listSorted, num);
+        return v;
+    }
+    private List<Integer> sorter(List<Integer> lista) {
+        List<Integer> listSorted = new ArrayList<>(lista);
+        Collections.sort(listSorted);
+        System.out.println(listSorted);
+        return listSorted;
+    }
+    private String binary(List<Integer> lista, Integer num) {
+        if (lista == null || lista.isEmpty()) {
+            return "-1";
+        }
+        int midd = lista.size() / 2;
+        int midValue = lista.get(midd);
+        if (midValue==num) {
+            return num.toString();
+        } else if (midValue < num) {
+            List<Integer> listCut = lista.subList(midd + 1, lista.size());
+            return this.binary(listCut, num);
+        } else {
+            List<Integer> listCut = lista.subList(0, midd);
+            return this.binary(listCut, num);
+        }
+    }
+
 
 }

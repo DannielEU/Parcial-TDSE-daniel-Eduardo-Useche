@@ -19,4 +19,9 @@ public class controller {
     public String linearSearch(@RequestParam Map<String,String> params){
         return serviceMath.linearSearch(params);
     }
+
+    @GetMapping("/binarySearch")
+    public String binarySearch(@RequestParam Map<String,String> params){
+        return serviceMath.binarySearch(params);
+    }
 }
