@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Form with GET</h1>
+<form >
+    <label>LinearRegresion:</label><br>
+    <input type="text" id="list" name="listVar" value="1,2,3,4,5"><br><br>
+    <input type="text" id="value" name="valueVar" value="5"><br><br>
+    <input type="button" value="Submit" onclick="loadGetMsg()">
+</form>
+<div id="getrespmsg"></div>
+<script>
+    function loadGetMsg() {
+    let nameVar = document.getElementById("list").value;
+    let valueVar = document.getElementById("value").value;
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+    document.getElementById("getrespmsg").innerHTML =
+    this.responseText;
+    }
+    xhttp.open("GET", "/proxy/linearSearch?list="+nameVar+"&value="+valueVar);
+    xhttp.send();
+    }
+</script>
+<form >
+    <label>BinarySearch:</label><br>
+    <input type="text" id="list1" name="listVar1" value="1,2,6,4,5"><br><br>
+    <input type="text" id="value1" name="valueVar1" value="34"><br><br>
+    <input type="button" value="Submit" onclick="loadGetMsg1()">
+</form>
+<div id="getrespmsg1"></div>
+<script>
+    function loadGetMsg1() {
+    let nameVar1 = document.getElementById("list1").value;
+    let valueVar1 = document.getElementById("value1").value;
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+    document.getElementById("getrespmsg1").innerHTML =
+    this.responseText;
+    }
+    xhttp.open("GET", "/proxy/binarySearch?list="+nameVar1+"&value="+valueVar1);
+    xhttp.send();
+    }
+</script>
+</body>
+</html>
